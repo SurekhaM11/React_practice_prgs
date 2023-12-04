@@ -1,0 +1,49 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+<style>
+    .box {
+        width: 300px;
+        height: 300px;
+        border: 1px solid red;
+        position: relative;
+
+    }
+
+    .arrow {
+        border: 1px solid black;
+        width: 50px;
+        top: 145px;
+        position: absolute;
+    }
+
+    .line {
+        height: 200px;
+        display: inline;
+        border: 1px solid blue;
+        position: absolute;
+        right: 10px;
+        top: 42px;
+    }
+</style>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const App = () => {
+        const shoot = () => {
+            //alert("shooto")
+
+        }
+        return <div>
+            <div className='box'>
+                <div className="line"></div>
+                <div className="arrow"></div>
+
+            </div>
+            <button onClick={shoot}>Click Me to shoot</button>
+        </div>
+    }
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+</script>

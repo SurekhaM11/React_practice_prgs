@@ -1,0 +1,66 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    // this is one way of passing data between parent to child
+    // using onchange and useState
+    const App = () => {
+        const [data, setData] = React.useState("")
+        const [result, setResult] = React.useState("")
+        const handleClick = (props) => {
+            //alert("clicked")
+            console.log(props.target.value);
+            setResult(data)
+        }
+        const changeHandker = (e) => {
+            // alert("change happened")
+            //console.log(e.target.value)
+            setData(e.target.value)
+        }
+        return <div>
+            <A name={result} />
+            <h1> App content</h1>
+            <input onChange={changeHandker} id="inputvalue" />
+            <button onClick={handleClick}>Click</button>
+        </div>
+    }
+    const A = (props) => {
+        return <div>A content{props.name}</div>
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />);
+
+</script>
+<!-- <script type="text/babel">
+    // this is one way of passing data between parent to child
+    // using useRef and useState
+    const App = () => {
+        const inputRef = React.useRef()
+        const [data, setData] = React.useState("")
+        const handleClick = () => {
+            //alert("Clicked")
+            console.log(inputRef)
+            setData(inputRef.current.value)
+            inputRef.current.value = ""
+        }
+        return <div>
+            <h3> App content</h3>
+            <input ref={inputRef} />
+            <br /><br />
+            <button onClick={handleClick}>Click Me to pass data to child</button>
+            <A name={data} />
+        </div>
+    }
+    const A = (props) => {
+        return <div>A content : {props.name}</div>
+    }
+
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />);
+
+</script> -->

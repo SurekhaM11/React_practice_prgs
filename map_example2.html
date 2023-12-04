@@ -1,0 +1,78 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+<style>
+    ol {
+        list-style-type: none;
+    }
+</style>
+<div id="root"></div>
+
+<script type="text/babel">
+
+    const App = () => {
+        const [data, setData] = React.useState()
+        const players = [
+            {
+                "name": "Sachin",
+                "runs": 20000,
+                "loc": "Mumbai"
+            },
+            {
+                "name": "Dhoni",
+                "runs": 10000,
+                "loc": "Ranchi"
+            },
+            {
+                "name": "Kohli",
+                "runs": 15000,
+                "loc": "Delhi"
+            }
+        ]
+        const fnView = (obj) => {
+            console.log("clicked", obj)
+            setData(obj)
+        }
+        return <div>
+            <table border='1px solid'>
+                <thead>
+                    <tr>
+                        <th>Player Name</th>
+                        <th>Runs</th>
+                        <th>Location</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        players.map((obj, ind) => {
+                            const { name, runs, loc } = obj;
+                            return <tr key={ind}>
+                                <td>{name}</td>
+                                <td>{runs}</td>
+                                <td>{loc}</td>
+                                <td><button onClick={() => {
+                                    fnView(obj)
+                                }} >View</button></td>
+                            </tr>
+                        })
+                    }
+
+                </tbody>
+            </table>
+            {data && <h1>{`sample`}</h1>}
+        </div>
+    };
+
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+</script>
+
+
+
+
+</body>
+
+</html>

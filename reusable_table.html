@@ -1,0 +1,93 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const Display = (props) => {
+        const { headers, data, heading, data1 } = props
+        return <div>
+            <h3>{heading}</h3>
+            <table border='1px solid black'>
+                <thead>
+                    <tr>
+                        {headers.map((val, ind) => {
+                            return <th key="ind"> {val}</th>
+                        })
+                        }
+                    </tr>
+                    <tbody>
+                        {
+                            data1.map((val, ind) => {
+                                return <tr key={ind}> {data1.val}</tr>
+                            })
+                        }
+
+                    </tbody>
+                </thead>
+
+            </table>
+        </div>
+    }
+    const App = () => {
+        const players = [
+            {
+                name: 'Sachin',
+                runs: 20000,
+                retiredOn: '03-10-2010'
+            },
+            {
+                name: 'Pointing',
+                runs: 16000,
+                retiredOn: '01-01-2015'
+            },
+            {
+                name: 'Lara',
+                runs: 19000,
+                retiredOn: '02-07-2005'
+            }
+
+        ]
+        const Students = [
+            {
+                Student_name: "Surekha",
+                Marks: 989,
+                Grade: 18,
+                school: "A"
+            },
+            {
+                Student_name: "B",
+                Marks: 928,
+                Grade: 844,
+                school: "B"
+            },
+            {
+                Student_name: "C",
+                Marks: 198,
+                Grade: 834,
+                school: "C"
+            },
+            {
+                Student_name: "D",
+                Marks: 938,
+                Grade: 834,
+                school: "D"
+            },
+            {
+                Student_name: "E",
+                Marks: 983,
+                Grade: 812,
+                school: "E"
+            },
+        ]
+        return <div>
+
+            <Display headers={["Name", "Runs", "retiredOn"]} data={players} heading={"Players"} data1={[name, runs, retiredOn]} />
+            <Display headers={["Name", "Marks", "Grade", "School"]} data={Students} heading={"Students"} data1={[Student_name, Marks, Grade, school]} />
+        </div>
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+</script>

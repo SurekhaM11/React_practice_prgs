@@ -1,0 +1,94 @@
+import React, { useState, useRef } from 'react';
+
+const BookList = () => {
+const [books, setBooks] = useState([
+{
+id: 1,
+title: "The Hitchhiker's Guide to the Galaxy",
+author: "Douglas Adams",
+publicationYear: 1979,
+genres: ["Science Fiction", "Comedy"]
+},
+{
+id: 2,
+title: "To Kill a Mockingbird",
+author: "Harper Lee",
+publicationYear: 1960,
+genres: ["Fiction", "Classics"]
+},
+{
+id: 3,
+title: "1984",
+author: "George Orwell",
+publicationYear: 1949,
+genres: ["Dystopian", "Political Fiction"]
+}
+]);
+
+const titleInputRef = useRef(null);
+const authorInputRef = useRef(null);
+const yearInputRef = useRef(null);
+const genresInputRef = useRef(null);
+
+const addBook = () => {
+const newTitle = titleInputRef.current.value;
+const newAuthor = authorInputRef.current.value;
+const newYear = yearInputRef.current.value;
+const newGenres = genresInputRef.current.value.split(',');
+
+if (newTitle && newAuthor && newYear && newGenres) {
+const newBook = {
+id: books.length + 1,
+title: newTitle,
+author: newAuthor,
+publicationYear: parseInt(newYear, 10),
+genres: newGenres
+};
+
+setBooks([...books, newBook]);
+
+// Clear input fields
+titleInputRef.current.value = '';
+authorInputRef.current.value = '';
+yearInputRef.current.value = '';
+genresInputRef.current.value = '';
+}
+};
+
+return (
+<div>
+    <h1>Book List</h1>
+    <div>
+        <label htmlFor="titleInput">Title:</label>
+        <input type="text" id="titleInput" ref={titleInputRef} />
+    </div>
+    <div>
+        <label htmlFor="authorInput">Author:</label>
+        <input type="text" id="authorInput" ref={authorInputRef} />
+    </div>
+    <div>
+        <label htmlFor="yearInput">Publication Year:</label>
+        <input type="text" id="yearInput" ref={yearInputRef} />
+    </div>
+    <div>
+        <label htmlFor="genresInput">Genres (comma-separated):</label>
+        <input type="text" id="genresInput" ref={genresInputRef} />
+    </div>
+    <button onClick={addBook}>Add Book</button>
+    <div>
+        <h2>Books:</h2>
+        <ul>
+            {books.map(book => (
+            <li key={book.id}>
+                {book.title} by {book.author} ({book.publicationYear})
+                <br />
+                Genres: {book.genres.join(', ')}
+            </li>
+            ))}
+        </ul>
+    </div>
+</div>
+);
+};
+
+export default BookList;

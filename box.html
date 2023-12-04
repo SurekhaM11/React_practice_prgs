@@ -1,0 +1,37 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+<style>
+    .box {
+        display: inline-block;
+        border: 1px solid red;
+        width: 100px;
+        line-height: 100px;
+        text-align: center;
+    }
+</style>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    function Box(params) {
+        return <div className='box'>{params.no}</div>
+    };
+    const App = () => {
+        return <div>
+            <div><Box no="1" /><Box no="2" /></div>
+            <div><Box no="3" /><Box no="4" /></div>
+        </div>
+    };
+
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+</script>
+
+
+
+
+</body>
+
+</html>

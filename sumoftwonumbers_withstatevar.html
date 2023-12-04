@@ -1,0 +1,47 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const App = () => {
+        const [data, setData] = React.useState({})
+        const [result1, setResult] = React.useState()
+        const [result2, setSubtraction] = React.useState()
+        const addition = () => {
+            //alert("Addition")
+            console.log(data)
+            const sum = parseInt(data?.input1) + parseInt(data?.input2)
+            console.log(sum)
+            setResult(sum)
+        }
+        const subtraction = () => {
+            //alert("subtraction")
+            const sub = parseInt(data?.input1) - parseInt(data?.input2)
+            setSubtraction(sub)
+        }
+        const grabinput = (e) => {
+            const { id, value } = e?.target
+            //console.log("grab the input", e?.target?.value)
+            // console.log(e?.target?.id)
+            setData({ ...data, [id]: value })
+
+        }
+        return <div>
+            <label>Enter First Number : </label>
+            <input onChange={grabinput} type="number" id="input1" /><br /><br />
+            <label>Enter Second Number : </label>
+            <input onChange={grabinput} type="number" id="input2" /><br /><br />
+            <button onClick={addition}>Add</button>
+            <button onClick={subtraction}>Subtraction</button>
+            <p>Result is : {result1}</p>
+            <p> {result2}</p>
+        </div>
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+</script>

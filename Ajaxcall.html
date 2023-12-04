@@ -1,0 +1,66 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+<link href="bootstrap.min.css" rel="stylesheet">
+<div id="root"></div>
+<script type="text/babel">
+    const Table = ({ Headers, data, columns }) => {
+        return <table border="1px solid black">
+            <thead>
+                <tr>
+                    {
+                        Headers.map((val, ind) => {
+                            return <th key={ind}> {val}
+                            </th>
+                        })
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    data.map((obj, index) => {
+                        return <tr key={index}>
+                            {
+                                columns.map((val1, ind1) => {
+                                    return <td key={ind1}> {obj[val1]} </td>
+                                })
+                            }
+                        </tr>
+                    })
+                }
+            </tbody>
+        </table>
+    }
+    const App = () => {
+        const [mData, setmData] = React.useState([])
+        const mockdata = [
+            {
+                "name": "Surekha",
+                "location": "bangalore"
+            },
+            {
+                "name": "Surekha",
+                "location": "bangalore"
+            },
+            {
+                "name": "Surekha",
+                "location": "bangalore"
+            }
+        ]
+        const fnClick = () => {
+
+            setmData(mockdata)
+        }
+        return <div>
+            <h3>Ajax Call</h3>
+            <button onClick={fnClick}>Get User Data</button>
+            {
+                mData.length > 0 &&
+                <Table Headers={["Name", "Location"]} data={[mData]} columns={[name, location]} />
+            }
+        </div>
+    }
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+
+</script>

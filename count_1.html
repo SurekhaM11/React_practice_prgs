@@ -1,0 +1,31 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    function App() {
+        let no = 1;
+        function increment() {
+            // alert("entered")
+            //var no = document.getElementById("root")
+
+            no = no + 1;
+            document.querySelector("p").innerText = no;
+
+        }
+        return (<div>
+            <h1>{no}</h1>
+            <p>
+                <b>No:</b><input />
+            </p>
+            <button onClick={increment}>Click Me!</button>
+        </div>)
+    }
+
+    const container = document.getElementById("root");
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+</script>

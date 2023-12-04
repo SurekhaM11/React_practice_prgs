@@ -1,0 +1,138 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const Question = (props) => {
+        const opts = ['a', 'b', 'c', 'd']
+        const { qn, options, type, index, id, fnChange } = props
+        return <div>
+            <h4>{index + 1} . {qn}</h4>
+            {
+                options.map((val, ind) => {
+                    return <p key={ind}><input name={id} onChange={fnChange} value={opts[ind]} type={type == "M" ? "checkbox" : "radio"} /> {val}</p>
+                })
+            }
+        </div>
+    }
+    const App = () => {
+        const [userAns, setUserAns] = React.useState({})
+        const fnChange = (e) => {
+            const { name, value, type, checked } = e.target;
+            if (type == 'checkbox') {
+                const checkedValues = userAns[name] ? userAns[name].split("") : []
+                if (checked) {
+                    checkedValues.push(value)
+                }
+                else {
+                    const index = checkedValues.indexOf(value);
+                    checkedValues.splice(index, value)
+                }
+                setUserAns({ ...userAns, [name]: checkedValues.sort().join("") })
+            }
+            else {
+                setUserAns({ ...userAns, [name]: value })
+                console.log({ ...userAns, [name]: value })
+            }
+        }
+        const submitAnswers = () => {
+            const marks = 0;
+            console.log("submitted", userAns)
+            for (const answer in questions) {
+                console.log(questions[answer])
+            }
+            //console.log(questions)
+            // for (const key in userAns) {
+            //     if (userAns[key] == questions[key]) {
+            //         marks = marks + 1;
+            //     }
+            // }
+            // alert(`you got ${marks}`)
+        }
+        const questions = [
+            {
+                "id": 1,
+                "qn": "Which of the following is used in React.js to increase performance?",
+                "options": ["Virtual Dom", "Original DOM", "Both", "None of the above"],
+                "type": "M",
+                "answer": ["a"]
+            },
+            {
+                "id": 2,
+                "qn": "What is ReactJS?",
+                "options": ["Serverside Framework", "Clientside Framework", "Both", "None of the above"],
+                "type": "S",
+                "answer": ["b"]
+            },
+            {
+                "id": 3,
+                "qn": "Identify the one which is used to pass data to components from outside",
+                "options": ["Render with arguments", "setState", "PropTypes", "props"],
+                "type": "M",
+                "answer": ["d"]
+            },
+            {
+                "id": 4,
+                "qn": "Who created React.js?",
+                "options": ["Jordan Mike", "Jordan Walke", "Tim Lee", "Jordan Lee"],
+                "type": "S",
+                "answer": ["b"]
+            },
+            {
+                "id": 5,
+                "qn": "In which language is React.js written?",
+                "options": ["Phython", "Java", "JavaScript", "PHP"],
+                "type": "S",
+                "answer": ["c"]
+            },
+            {
+                "id": 6,
+                "qn": "What is Babel?",
+                "options": ["Javacript Compiler", "JavaScript Interpreter", "Javascript transpiler", "None"],
+                "type": "S",
+                "answer": ["a"]
+            },
+            {
+                "id": 7,
+                "qn": "Below which are valid syntax to create variable in JavaScript ?",
+                "options": ["name='Sachin' ", "var name='Sachin' ", "var name;", "name"],
+                "type": "S",
+                "answer": ["b"]
+            },
+            {
+                "id": 8,
+                "qn": "Which of the following method is used to access the state of a component from inside of a member function?",
+                "options": ["this.prototype.stateValue", "this.getState", "this.values", "this.state"],
+                "type": "S",
+                "answer": ["c"]
+            },
+            {
+                "id": 9,
+                "qn": "State whether true or false:  Props are methods into other components?",
+                "options": ["true", "false"],
+                "type": "S",
+                "answer": ["a"]
+            },
+            {
+                "id": 10,
+                "qn": "What are arbitrary inputs of components in react also known as?",
+                "options": ["Elements", "key", "ref", "props"],
+                "type": "M",
+                "answer": ["d"]
+            }
+        ]
+        return <div >{
+            questions.map((obj, index) => {
+                return <Question key={index} {...obj} index={index} fnChange={fnChange} />
+            })
+        }
+            <button onClick={submitAnswers}>Submit</button>
+        </div>
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+
+</script>

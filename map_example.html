@@ -1,0 +1,37 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+<style>
+    ol {
+        list-style-type: none;
+    }
+</style>
+<div id="root"></div>
+
+<script type="text/babel">
+
+    const App = () => {
+        const Players = ["Sachin", "Dhoni", "kohli", "dravid"]
+        return <div>
+            <ol>
+                {
+                    Players.map((val, ind, oa) => {
+                        return <li key={"li_" + ind}>{val}</li>
+                    })
+                }
+            </ol>
+        </div>
+    };
+
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+</script>
+
+
+
+
+</body>
+
+</html>

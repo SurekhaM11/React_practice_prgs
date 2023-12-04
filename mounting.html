@@ -1,0 +1,35 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    function App() {
+        const h1Ref = React.useRef();
+        h1Ref.no = 1;
+        const h2Ref = React.useRef();
+        React.useEffect(() => {
+            console.log("useEffect")
+        })
+        function increment() {
+            h1Ref.no = h1Ref.no + 1;
+            h1Ref.current.innerText = h1Ref.no;
+        }
+        function decrement() {
+            h1Ref.no = h1Ref.no - 1;
+            h1Ref.current.innerText = h1Ref.no;
+        }
+        return (<div>
+            <h1 ref={h1Ref}></h1>
+            <h2 ref={h1Ref}></h2>
+            <button onClick={increment}>Increment</button>
+            <button onClick={decrement}>Decrement</button>
+        </div>)
+    }
+
+    const container = document.getElementById("root");
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+</script>

@@ -1,0 +1,48 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+<div id="root"></div>
+<script type="text/babel">
+    function prime() {
+        let number = document.getElementById("number").value
+        console.log("entered ", number)
+        if (number <= 1) {
+            console.log("false1");
+            document.innerText = 'not a prime'
+            return false;
+        } else if (number <= 3) {
+            console.log("true1")
+            document.body.innerText = ' prime'
+            return true;
+        } else if (number % 2 === 0 || number % 3 === 0) {
+            console.log("false2")
+            document.body.innerText = 'not a prime'
+            return false;
+        }
+        let i = 5;
+        while (i * i <= number) {
+            if (number % i === 0 || number % (i + 2) === 0) {
+                console.log("false3")
+                document.body.innerText = 'not a prime'
+                return false;
+            }
+            i += 6;
+        }
+        console.log("true2")
+        document.body.innerText = ' prime'
+        return true;
+    }
+
+    function App() {
+
+        return <div>
+            <label >Enter a number </label>
+            <input type="number" id='number' />
+            <button onClick={prime}>Click Me!</button>
+        </div>
+    }
+    const container = document.getElementById("root")
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />)
+</script>

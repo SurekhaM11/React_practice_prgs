@@ -1,0 +1,72 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const ctx = React.createContext();
+    const Provider = ctx.Provider
+    const App = () => {
+        const data = {
+            "name": "sachin",
+            "profession": "engineer",
+            "living": "Bangalore"
+        }
+
+        return <div>
+            <h1>App</h1>
+
+            <Provider value={data}>
+                <A />
+            </Provider>
+
+
+        </div>
+    }
+    const A = () => {
+        const data2 = {
+            "name": "Surekha1",
+            "profession": "tester",
+            "living": "Bangalore1"
+        }
+        return <div>
+            <h1>A</h1>
+            <Provider value={data2}>
+                <B />
+            </Provider>
+        </div>
+    }
+    const B = () => {
+        const ctxData2 = React.useContext(ctx)
+        return <div>
+            <h1>B {ctxData2.name}</h1>
+            <C />
+        </div>
+    }
+    const C = () => {
+        const ctxData = React.useContext(ctx)
+        return <div>
+            <h1>C {ctxData.name}</h1>
+            <D />
+            <E />
+        </div>
+    }
+    const D = () => {
+        const ctxData = React.useContext(ctx)
+        return <div>
+            <h1>D {ctxData.DOB}</h1>
+        </div>
+    }
+    const E = () => {
+        const ctxData = React.useContext(ctx)
+        return <div>
+            <h1>E {ctxData.living}</h1>
+        </div>
+    }
+
+
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+
+</script>

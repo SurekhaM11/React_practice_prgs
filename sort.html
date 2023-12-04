@@ -1,0 +1,89 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+<link rel="stylesheet" href="bootstrap.min.css">
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const App = () => {
+        const Employee = [
+            {
+                "name": "Surekha",
+                "profession": "Employee",
+                "location": "bangalore",
+                phone: 222,
+            },
+            {
+                "name": "Murthi",
+                "profession": "Employee",
+                "location": "bangalore",
+                phone: 43243,
+            },
+            {
+                "name": "Srivatsa",
+                "profession": "Student",
+                "location": "bangalore",
+                phone: 423423
+            },
+            {
+                "name": "sas",
+                "profession": "bank manager",
+                "location": "calcutta",
+                phone: 5654645
+            },
+            {
+                "name": "asd",
+                "profession": "worker",
+                "location": "hyderabad",
+                phone: 978657
+            },
+            {
+                "name": "trew",
+                "profession": "teacher",
+                "location": "mumbai",
+                phone: 7567575
+            },
+            {
+                "name": "poiufds",
+                "profession": "shop keeper",
+                "location": "bangalore",
+                phone: 856756
+            }
+        ]
+        const fnSort = (event) => {
+            console.log("clicked", event)
+        }
+        return <div>
+            <table className='table table-primary'>
+                <thead>
+                    <tr>
+                        <th onClick={fnSort} value="ename" name="ename">Employee Name</th>
+                        <th onClick={fnSort} value="profession" name="profession">Profession</th>
+                        <th onClick={fnSort} value="location" name="location">Location</th>
+                        <th onClick={fnSort} value="phone" name="phone">Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        Employee.map(obj => (
+                            <tr key={obj.name}>
+                                <td>{obj.name} </td>
+                                <td>{obj.profession}</td>
+                                <td>{obj.location}</td>
+                                <td>{obj.phone}</td>
+                            </tr>
+                        )
+
+                        )
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+
+</script>

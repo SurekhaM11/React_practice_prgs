@@ -1,0 +1,50 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const App = () => {
+        const OrederList = (props) => {
+            const { data, heading } = props
+            return <div>
+                <h3>{heading}</h3>
+                <ol>
+                    {
+                        data.map((val) => {
+                            return <li key={val}>
+                                {val}
+                            </li>
+                        })
+
+                    }
+                </ol>
+            </div>
+        }
+        const data = [
+            {
+                heading: "Players",
+                items: ["player1", "player2", "player3", "player4"]
+            },
+            {
+                heading: "Students",
+                items: ["student1", "student2", "student3", "student4", "student5"]
+            }
+        ]
+        // const Players = ["player1", "player2", "player3", "player4"]
+        // const Students = ["student1", "student2", "student3", "student4", "student5"]
+        return <div>
+            {
+                data.map(({ heading, items }, ind, oa) => {
+                    return <OrederList data={items} heading={heading} />
+                })
+            }
+
+
+        </div>
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+</script>

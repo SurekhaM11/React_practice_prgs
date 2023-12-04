@@ -1,0 +1,51 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+<div id="root">
+
+</div>
+<script type="text/babel">
+
+    const Child = (props) => {
+        //when ever you try to pass the data(throgh props) the data should be turned as 
+        // props :{
+        //     cb:f2
+        // }
+        //now we need to call the callback functions
+        const [data, setData] = React.useState("")
+        const [result, setResult] = React.useState("")
+        const fnClick = (e) => {
+            console.log("clicked", data)
+            setResult(data)
+            props.cb(data);
+        }
+        const fnChange = (e) => {
+            //console.log("changed", e.target.value)
+            setData(e?.target?.value)
+        }
+        return <div>
+            <h2>Child</h2>
+            <label > Enter the data and Click to pass </label>
+
+            <input onChange={fnChange} />
+            <br /><br />
+            <button onClick={fnClick}>Click Me!</button>
+        </div>
+    }
+    const App = () => {
+        const [final, setFinal] = React.useState("")
+        const fn = (data) => {
+            console.log("from fn callback", data)
+            setFinal(data)
+        }
+        return <div>
+            <h1> parent</h1>
+            <Child cb={fn} />
+            {final}
+        </div >
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+</script>

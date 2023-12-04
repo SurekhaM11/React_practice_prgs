@@ -1,0 +1,114 @@
+<script src="reactjs.js"></script>
+<script src="reactDOM.js"></script>
+<script src="babel.js"></script>
+
+<link rel="stylesheet" href="bootstrap.min.css">
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const Employee = [
+        {
+            "name": "Surekha",
+            "profession": "Employee",
+            "location": "bangalore",
+            phone: [222, 32432]
+        },
+        {
+            "name": "Murthi",
+            "profession": "Employee",
+            "location": "bangalore",
+            phone: 43243,
+        },
+        {
+            "name": "Srivatsa",
+            "profession": "Student",
+            "location": "bangalore",
+            phone: 423423
+        },
+        {
+            "name": "sas",
+            "profession": "bank manager",
+            "location": "calcutta",
+            phone: 5654645
+        },
+        {
+            "name": "asd",
+            "profession": "worker",
+            "location": "hyderabad",
+            phone: 978657
+        },
+        {
+            "name": "trew",
+            "profession": "teacher",
+            "location": "mumbai",
+            phone: 7567575
+        },
+        {
+            "name": "poiufds",
+            "profession": "shop keeper",
+            "location": "bangalore",
+            phone: 856756
+        }
+    ]
+    const Display = (props) => {
+
+        const [option, setOption] = React.useState("")
+        const radioChange = (e) => {
+            //console.log("changes:", e?.target?.value)
+            setOption(e?.target?.value)
+            props.cb(e?.target?.value)
+        }
+        return <div>
+            <h3>Child</h3>
+            <div>
+                <input type="radio" id="preference" name="preference" value="location" onChange={radioChange} />
+                <label> By location</label>
+                <input type="radio" id="preference" name="preference" value="all" onChange={radioChange} />
+                <label>All</label>
+                <input type="radio" id="preference" name="preference" value="gender" onChange={radioChange} />
+                <label> By gender</label>
+
+            </div>
+        </div>
+    }
+    const App = () => {
+        const [final, setFinal] = React.useState("all")
+        const fn = (data) => {
+           // console.log("cb called", data)
+            setFinal(data)
+            //console.log("in fn", data)
+        }
+        return <div>
+            <h1>Parent</h1>
+            <div>
+
+                <table className='table table-primary'>
+                    <thead>
+                        <tr>
+                            <th>Employee Name</th>
+                            <th>Profession</th>
+                            <th>Location</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Employee.map(obj => (
+                            <tr key={obj.name}>
+                                <td>{obj.name}</td>
+                                <td>{obj.profession}</td>
+                                <td>{obj.location}</td>
+                                <td>{Array.isArray(obj.phone) ? obj.phone.join(', ') : obj.phone}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            <Display cb={fn} />
+        </div>
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+
+</script>
